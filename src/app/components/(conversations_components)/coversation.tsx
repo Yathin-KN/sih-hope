@@ -20,6 +20,7 @@ import useUserStore from "../../store/userStore";
 import { addTextMessageToTicket } from "../../api/addTextMessage";
 import { newChatAtomTrigger } from "../../(pages)/layout";
 import { queryResponseAtom } from "../Recommendations";
+import { TranslateRequest, translateText } from "../../api/translation";
 
 type UserType = "Customer" | "Agent";
 
@@ -365,6 +366,28 @@ const Conversation = () => {
     }
   };
   
+  const languageOptions = [
+    { label: 'English', value: 'en' },
+    { label: 'Spanish', value: 'es' },
+    { label: 'French', value: 'fr' },
+    { label: 'German', value: 'de' },
+    { label: 'Chinese', value: 'zh' },
+    { label: 'Japanese', value: 'ja' },
+    { label: 'Russian', value: 'ru' },
+    { label: 'Hindi', value: 'hi' },
+    { label: 'Bengali', value: 'bn' },
+    { label: 'Telugu', value: 'te' },
+    { label: 'Marathi', value: 'mr' },
+    { label: 'Tamil', value: 'ta' },
+    { label: 'Urdu', value: 'ur' },
+    { label: 'Gujarati', value: 'gu' },
+    { label: 'Kannada', value: 'kn' },
+    { label: 'Malayalam', value: 'ml' },
+    { label: 'Punjabi', value: 'pa' },
+    { label: 'Oriya (Odia)', value: 'or' },
+  ];
+  
+
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
@@ -385,6 +408,21 @@ const Conversation = () => {
   
   const handleSubmitAsSolved = () => {
     setIsModalOpen(true);
+  };
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const handleLanguageChange = async (e:any) => {
+    setSelectedLanguage(e.target.value);
+    const translationRequest: TranslateRequest = {
+      text: text,
+      targetLanguage: e.target.value,
+    };
+  
+    try {
+      const translatedText = await translateText(translationRequest);
+      setText(translatedText);
+    } catch (error) {
+      console.error('Error translating text:', error);
+    }
   };
 
   return (
@@ -446,10 +484,17 @@ const Conversation = () => {
           <div className="border border-x-0 border-t-0 relative items-center">
             <textarea
               placeholder="chat"
-              className="w-full h-[150px] bg-slate-100 p-3 rounded-sm focus:outline-none relative "
+              className="w-full h-[150px] bg-slate-100 py-6 px-3 rounded-sm focus:outline-none relative "
               value={text || ""}
               onChange={(e) => handleChange(e.target.value)}
             ></textarea>
+             <select className="absolute top-1 right-3 text-sm" value={selectedLanguage} onChange={(e) => handleLanguageChange(e)}>
+        {languageOptions.map((option) => (
+          <option key={option.value} value={option.value} className="text-sm">
+            {option.label}
+          </option>
+        ))}
+      </select>
             <div
               className={clsx("text-white bg-blue-500 absolute right-2 bottom-4 text-sm cursor-pointer py-1 px-3 rounded-md flex justify-center items-center hover:bg-white hover:text-blue-500",{
                 "bg-white":isLoading,
