@@ -39,7 +39,10 @@ interface ChatBubble {
 function Modal({ setIsOpen , text }: { setIsOpen: any , text:string }) {
 
   const [_,setRecommendationText]=useAtom(recommendationText)
-  const handleClick=()=>{
+  const handleClick=async()=>{
+    //  if(text){
+    //   const translatedResult = await translateText(translationRequest);
+    //  }
      setRecommendationText(text)
   }
   return (

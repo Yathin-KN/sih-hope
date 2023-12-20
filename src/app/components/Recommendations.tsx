@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { postEmployeeRanking } from "../api/ranking";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { populateEndpoint } from "../api/populateEndPoint";
 const apiData = atom("String");
 
 type Data = {
@@ -36,12 +37,14 @@ interface QueryResponse {
   input_query: string;
   intent: string;
   outputs: Output[];
+  out_of_context:number;
 }
 
 
 export const queryResponseAtom=atom<QueryResponse | null>({
   input_query: "Sample query",
   intent: "Sample intent",
+  out_of_context:0,
   outputs: [
     {
       dt_response: "Yes",
@@ -136,6 +139,21 @@ export default function Recommendations() {
     callGetHelp("text", reccomendationText, accessToken || "");
   }, [reccomendationText]);
 
+  const [text,setText]=useState("")
+
+  const handleRAGInput=async ()=>{
+    try{
+        const postData={
+          "title":reccomendationText,
+          "details":text
+        }
+        await populateEndpoint(postData)
+
+        toast.success("RAG updated")
+    }catch(error){
+       
+    }
+  }
   return (
     <>
       <div className="w-full container">
@@ -154,6 +172,27 @@ export default function Recommendations() {
                 <span>Reccomendations :</span>
               </div>
               <div className=" rounded-md overflow-y-scroll h-[50vh]">
+                {(queryresponse?.out_of_context && !isLoading) &&
+                      <div>
+                      <div className=" bg-blue-100 p-4 rounded-md m-3 w-full">
+                        <div className="my-2">
+                          <p className="text-sm font-semibold text-gray-700">Query :</p>
+                          <p>{reccomendationText}</p>
+                        </div>
+                        <div className="my-2">
+                          <p className="text-sm font-semibold text-gray-700">Custom answer :</p>
+                          <textarea className="bg-white rounded-sm p-2 w-full " onChange={(e)=>setText(e.target.value)} value={text}>
+                            {text}
+                          </textarea>
+                        </div>
+                        <div>
+                          <button className="px-2 py-1 rounded-md bg-blue-500 my-2 tex-white text-sm font-semibold text-white" onClick={()=>handleRAGInput()}>
+                            Add to RAG
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                }
                 {/* {data[messages.id].recommendations.map(
                   (recommendation, index) => {
                     return (
@@ -182,7 +221,7 @@ export default function Recommendations() {
                     );
                   }
                 )} */}
-                {queryresponse && !isLoading ? (
+                {(queryresponse && !isLoading && !queryresponse.out_of_context) ? (
                   <div>
                     <div>{queryresponse.intent}</div>
                     <div>
@@ -219,7 +258,9 @@ export default function Recommendations() {
                     </div>
                   </div>
                 ) : (
-                  <div className={clsx("bg-gray-100 p-3 my-2 rounded-md animate-pulse ")}>
+                  <div className={clsx("bg-gray-100 p-3 my-2 rounded-md animate-pulse ",{
+                    "hidden":queryresponse?.out_of_context
+                  })}>
                     <div className="flex justify-between items-center">
                       <div className="w-7 h-7 text-center text-xs bg-gray-200 aspect-square rounded-full flex justify-center items-center"></div>
                       <div className="flex justify-center items-center">
