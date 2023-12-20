@@ -3,7 +3,7 @@ import { atom, useAtom } from "jotai";
 import { Edit, ThumbsUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { textInputField } from "../(pages)/dashboard/page";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { recommendationText } from "./(conversations_components)/coversation";
 import { getHelp } from "../api/getHelp";
 import useUserStore from "../store/userStore";

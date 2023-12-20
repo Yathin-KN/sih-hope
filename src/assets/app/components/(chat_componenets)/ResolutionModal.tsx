@@ -3,10 +3,10 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { X } from 'lucide-react'; 
 import { useAtom } from 'jotai';
-import { ticketDataIdInView } from '@/app/(pages)/dashboard/page';
-import { closeTicket } from '@/app/api/closeTicket';
-import useUserStore from '@/app/store/userStore';
-import { refetchAtomTrigger } from '@/app/(pages)/layout';
+import { ticketDataIdInView } from './../../../app/(pages)/dashboard/page';
+import { closeTicket } from './../../../app/api/closeTicket';
+import useUserStore from './../../../app/store/userStore';
+import { refetchAtomTrigger } from './../../../app/(pages)/layout';
 
 function ResolutionForm({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const initialValues = {

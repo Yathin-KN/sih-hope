@@ -8,7 +8,6 @@ import TicketRedirect from "./TicketRedirect";
 import { useAtom } from "jotai";
 import { ticketDataIdInView } from "../../(pages)/dashboard/page";
 import { new_notification, notificationTrigger } from "../../(pages)/layout";
-import Link from "next/link";
 
 
 // interfaces.ts
@@ -57,7 +56,7 @@ export default function Profile(){
             </div>
         </div>
         <div className="inline-flex items-center gap-3">
-          <Link href={"/"} className="bg-white border px-2 py-1 text-gray-700 rounded-md mx-2 text-sm">Login</Link>
+          <a href={"/"} className="bg-white border px-2 py-1 text-gray-700 rounded-md mx-2 text-sm">Login</a>
         <div className="relative">
             
             <Bell fill="white" stroke="white" size={22}  onClick={()=>setIsOpen((prev)=>!prev)} className="cursor-pointer"/>

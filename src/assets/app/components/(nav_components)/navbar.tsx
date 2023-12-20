@@ -1,9 +1,7 @@
 'use client';
-import Link from "next/link";
 import { MdHome } from "react-icons/md";
 import { SiSimpleanalytics } from "react-icons/si";
 import clsx from "clsx";
-import { usePathname } from 'next/navigation';
 
 const IconTitle = [
   {
@@ -19,12 +17,12 @@ const IconTitle = [
 ];
 
 export default function NavBar() {
-  const pathname = usePathname();
+  const pathname="/";
   return (
     <div className={"bg-[#1b373b] h-screen flex flex-col justify-start py-4 items-center"}>
       {IconTitle.map((IconTitle, index) => (
         <div className="flex justify-center items-center gap-2 w-full" key={index.toString()}>
-          <Link href={IconTitle.route}>
+          <a href={IconTitle.route}>
             <div className={clsx("w-full inline-flex justify-center items-center max-h-12 aspect-square", {
               "bg-[#618385]": (pathname === IconTitle.route),
               "text-white": (pathname === IconTitle.route),
@@ -32,7 +30,7 @@ export default function NavBar() {
             })}>
               {IconTitle.icon}
             </div>
-          </Link>
+          </a>
         </div>
       ))}
     </div>

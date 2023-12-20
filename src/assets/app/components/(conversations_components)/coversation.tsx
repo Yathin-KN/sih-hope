@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { atom, useAtom  } from "jotai";
 import { Countatom, textInputField, ticketDataIdInView } from "../../(pages)/dashboard/page";
 import TicketInfoCard from "./ticketInfoCard";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { fetchInitialConversations } from "../../api/getAllTickets";
 import { CallMessage, TicketData } from "../../types";
 import { fetchTicketData } from "../../api/getTicketData";

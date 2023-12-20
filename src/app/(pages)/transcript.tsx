@@ -5,7 +5,7 @@ export default function Transcript(){
     const [transcriptStream,setTranscriptStream]=useState("")
 
     useEffect(() => {
-        const socket = new WebSocket('wss://d1f9-2401-4900-1cbd-e791-7cdb-85fb-f937-f739.ngrok-free.app');
+        const socket = new WebSocket('https://d1f9-2401-4900-1cbd-e791-7cdb-85fb-f937-f739.ngrok-free.app/translate');
     
         socket.onopen = () => {
           console.log('WebSocket connection established');

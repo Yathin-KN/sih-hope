@@ -1,12 +1,12 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "react-query";
 import { fetchInitialConversations } from "../../api/getAllTickets";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import useUserStore from "../../store/userStore";
 import { useAtom } from "jotai";
-import { ticketDataIdInView } from "@/app/(pages)/dashboard/page";
-import { refetchAtomTrigger } from "@/app/(pages)/layout";
+import { ticketDataIdInView } from "../../../app/(pages)/dashboard/page";
+import { refetchAtomTrigger } from "../../../app/(pages)/layout";
 type TicketStatus = "new" | "resolved" | "active";
 
 const SkeletonCard = () => {

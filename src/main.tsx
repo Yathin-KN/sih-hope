@@ -11,6 +11,8 @@ import Dashboard from './app/(pages)/dashboard/page.tsx';
 import Provider from './assets/app/utils/Provider.tsx';
 import SignInPage from './app/(auth)/page.tsx';
 import SignUpForm from './app/components/(auth_components)/SignUp.tsx';
+import Admin from './app/components/Admin.tsx';
+import Knowledge from './app/components/(KnowledgeSearch)/Knowledge.tsx';
 
 
 const router = createBrowserRouter([
@@ -23,6 +25,12 @@ const router = createBrowserRouter([
   },{
     path:"/signup",
     element:<SignUpForm/>
+  },{
+    path:"/admin",
+    element:<Admin/>
+  },{
+    path:"/knowledge",
+    element:<Knowledge/>
   }
 ]);
 

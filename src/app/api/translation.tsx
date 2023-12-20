@@ -6,7 +6,7 @@ export interface TranslateRequest {
 }
 
 export async function translateText(request: TranslateRequest): Promise<string> {
-  const url = 'https://4e9c-2401-4900-1cbd-e791-7cdb-85fb-f937-f739.ngrok-free.app/translate';
+  const url = 'https://6fa3-2401-4900-1cbd-e791-7cdb-85fb-f937-f739.ngrok-free.app/translate';
 
   try {
     const response: AxiosResponse<{ translatedText: string }> = await axios.post(url, request,{

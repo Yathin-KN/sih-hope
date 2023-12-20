@@ -18,12 +18,6 @@ interface Employee {
   }
 
   
-const employeeData: Employee = {
-    email: 'johndoe@example.com',
-    employeeId: 'EMP1234',
-    profilePicture: 'https://via.placeholder.com/150', 
-  };
-  
 
 const status:boolean = true; 
 export default function Profile(){

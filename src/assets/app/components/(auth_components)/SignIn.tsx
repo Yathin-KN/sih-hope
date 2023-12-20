@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import useUserStore from '../../store/userStore';
 import { loginToEmployeeAPI } from '../../api/signIn';
-import Link from 'next/link';
 
 const SignInForm = () => {
   const validationSchema = Yup.object().shape({
@@ -40,7 +39,7 @@ const SignInForm = () => {
   return (
     <div className="max-w-md w-full mx-auto">
       <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
-      <Link href={'/dashboard'} >Dashboard</Link>
+      <a href={'/dashboard'} >Dashboard</a>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={validationSchema}

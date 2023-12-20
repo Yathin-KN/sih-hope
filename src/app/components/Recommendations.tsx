@@ -1,6 +1,6 @@
 "use client";
 import { atom, useAtom } from "jotai";
-import { Edit, ThumbsUp } from "lucide-react";
+import { Edit, Loader2, ThumbsUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { textInputField } from "../(pages)/dashboard/page";
 import { recommendationText } from "./(conversations_components)/coversation";
@@ -140,9 +140,10 @@ export default function Recommendations() {
   }, [reccomendationText]);
 
   const [text,setText]=useState("")
-
+  const [isLoadingA,setIsLoadingA]=useState(false)
   const handleRAGInput=async ()=>{
     try{
+      setIsLoadingA(true)
         const postData={
           "title":reccomendationText,
           "details":text
@@ -152,6 +153,8 @@ export default function Recommendations() {
         toast.success("RAG updated")
     }catch(error){
        
+    }finally{
+      setIsLoadingA(false)
     }
   }
   return (
@@ -186,8 +189,8 @@ export default function Recommendations() {
                           </textarea>
                         </div>
                         <div>
-                          <button className="px-2 py-1 rounded-md bg-blue-500 my-2 tex-white text-sm font-semibold text-white" onClick={()=>handleRAGInput()}>
-                            Add to RAG
+                          <button className="px-2 py-1 rounded-md bg-blue-500 my-2  flex items-center justify-center tex-white text-sm font-semibold text-white" onClick={()=>handleRAGInput()}>
+                            {isLoadingA &&<Loader2 className="animate-spin text-white" size={16}/>}Add to RAG
                           </button>
                         </div>
                       </div>

@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { NewTicket } from "../../types";
 import { useAtom } from "jotai";
 import { new_notification, notifications_, refetchAtomTrigger } from "../../(pages)/layout";
-import { acceptTicket } from "@/app/api/acceptTicket";
-import useUserStore from "@/app/store/userStore";
+import { acceptTicket } from "./../../../app/api/acceptTicket";
+import useUserStore from "./../../../app/store/userStore";
 
 interface NotificationCardInterface {
   name: string;
