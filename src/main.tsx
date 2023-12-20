@@ -10,6 +10,7 @@ import {
 import Dashboard from './app/(pages)/dashboard/page.tsx';
 import Provider from './assets/app/utils/Provider.tsx';
 import SignInPage from './app/(auth)/page.tsx';
+import SignUpForm from './app/components/(auth_components)/SignUp.tsx';
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,9 @@ const router = createBrowserRouter([
   },{
     path:"/login",
     element:<SignInPage/>
+  },{
+    path:"/signup",
+    element:<SignUpForm/>
   }
 ]);
 
